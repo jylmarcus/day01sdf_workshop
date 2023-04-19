@@ -1,6 +1,7 @@
 package sg.edu.nus.iss;
 
 import java.util.Scanner;
+import java.io.File;
 import java.util.ArrayList;
 
 public class App 
@@ -50,6 +51,12 @@ public class App
 
     public static void main( String[] args )
     {
+        //specify saved cart directory
+        File cartdb = new File(args[0]);
+        if (!cartdb.exists()) {
+            cartdb.mkdir();
+        }
+
         ArrayList<String> shoppingCart = new ArrayList<String>();
         System.out.println("Welcome to your shopping cart");
         System.out.println("Type 'help to show a list of commands");
@@ -63,10 +70,15 @@ public class App
             input = scan.nextLine();
             switch(command) {
                 case "help":
+                    System.out.println("'login <username> to load or create a cart");
                     System.out.println("'list' to show a list of items in the shopping cart");
                     System.out.println("'add' <item name>, <item name>...");
                     System.out.println("'delete' <item number>");
+                    System.out.println("'save' to save current cart");
+                    System.out.println("'users' to show list of users");
                     System.out.println("'quit' to exit the program");
+                case "login":
+                    break;
                 case "list":
                     list(shoppingCart);
                     break;
@@ -81,6 +93,10 @@ public class App
                         Integer delItemIndex = Integer.parseInt(input.trim())-1;
                         delete(delItemIndex, shoppingCart);
                     }
+                    break;
+                case "save":
+                    break;
+                case "users":
                     break;
                 case "quit":
                     break;
